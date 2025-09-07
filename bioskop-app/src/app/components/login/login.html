@@ -1,0 +1,40 @@
+<div class="login-container">
+  <h2>Prijavljivanje</h2>
+  
+  <form (ngSubmit)="onSubmit()" class="login-form">
+    <div class="form-group">
+      <label for="username">Korisničko ime:</label>
+      <input type="text" 
+             id="username" 
+             [(ngModel)]="loginForm.username" 
+             name="username" 
+             required
+             placeholder="Unesite korisničko ime">
+    </div>
+
+    <div class="form-group">
+      <label for="password">Lozinka:</label>
+      <input type="password" 
+             id="password" 
+             [(ngModel)]="loginForm.password" 
+             name="password" 
+             required
+             placeholder="Unesite lozinku">
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{errorMessage}}
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Prijavi se</button>
+      <button type="button" (click)="onShowRegister()" class="btn btn-secondary">Registruj se</button>
+    </div>
+  </form>
+
+  <div class="demo-credentials">
+    <h4>Demo nalog:</h4>
+    <p>Korisničko ime: <strong>marko</strong></p>
+    <p>Lozinka: <strong>123456</strong></p>
+  </div>
+</div>
