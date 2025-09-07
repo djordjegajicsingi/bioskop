@@ -1,0 +1,24 @@
+<div class="movie-list">
+  <div *ngIf="movies.length === 0" class="no-movies">
+    <p>Nema filmova koji odgovaraju kriterijumima pretrage.</p>
+  </div>
+  
+  <div *ngFor="let movie of movies" class="movie-card" (click)="onMovieClick(movie)">
+    <div class="movie-header">
+      <h3>{{movie.title}}</h3>
+      <span class="price">{{movie.price}} RSD</span>
+    </div>
+    
+    <div class="movie-info">
+      <p><strong>Žanr:</strong> {{movie.genre}}</p>
+      <p><strong>Režiser:</strong> {{movie.director}}</p>
+      <p><strong>Trajanje:</strong> {{movie.duration}} min</p>
+      <p><strong>Glumci:</strong> {{movie.actors.join(', ')}}</p>
+      <p><strong>Datum izlaska:</strong> {{movie.releaseDate | date:'dd.MM.yyyy'}}</p>
+    </div>
+    
+    <div class="movie-description">
+      <p>{{movie.description}}</p>
+    </div>
+  </div>
+</div>
