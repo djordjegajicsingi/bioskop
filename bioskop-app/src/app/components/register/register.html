@@ -1,0 +1,72 @@
+<div class="register-container">
+  <h2>Registracija</h2>
+  
+  <form (ngSubmit)="onSubmit()" class="register-form">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="firstName">Ime:</label>
+        <input type="text" 
+               id="firstName" 
+               [(ngModel)]="registerForm.firstName" 
+               name="firstName" 
+               required
+               placeholder="Unesite ime">
+      </div>
+
+      <div class="form-group">
+        <label for="lastName">Prezime:</label>
+        <input type="text" 
+               id="lastName" 
+               [(ngModel)]="registerForm.lastName" 
+               name="lastName" 
+               required
+               placeholder="Unesite prezime">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="username">Korisničko ime:</label>
+      <input type="text" 
+             id="username" 
+             [(ngModel)]="registerForm.username" 
+             name="username" 
+             required
+             placeholder="Unesite korisničko ime">
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="password">Lozinka:</label>
+        <input type="password" 
+               id="password" 
+               [(ngModel)]="registerForm.password" 
+               name="password" 
+               required
+               placeholder="Unesite lozinku">
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword">Potvrdite lozinku:</label>
+        <input type="password" 
+               id="confirmPassword" 
+               [(ngModel)]="confirmPassword" 
+               name="confirmPassword" 
+               required
+               placeholder="Potvrdite lozinku">
+      </div>
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">
+      {{errorMessage}}
+    </div>
+
+    <div *ngIf="successMessage" class="success-message">
+      {{successMessage}}
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Registruj se</button>
+      <button type="button" (click)="onShowLogin()" class="btn btn-secondary">Prijavi se</button>
+    </div>
+  </form>
+</div>
