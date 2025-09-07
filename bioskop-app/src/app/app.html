@@ -1,0 +1,74 @@
+<div class="app-container">
+  <header class="app-header">
+    <h1>{{title}}</h1>
+    <nav class="nav-menu">
+      <button (click)="onShowMovies()" 
+              [class.active]="currentView === 'movies'" 
+              class="nav-btn">
+        Filmovi
+      </button>
+      <button *ngIf="currentUser" 
+              (click)="onShowCart()" 
+              [class.active]="currentView === 'cart'" 
+              class="nav-btn">
+        Korpa ({{userReservations.length}})
+      </button>
+      <div class="user-section">
+        <span *ngIf="currentUser" class="welcome-text">
+          Dobrodošli, {{currentUser.firstName}} {{currentUser.lastName}}
+        </span>
+        <button *ngIf="currentUser" (click)="onLogout()" class="btn btn-secondary">
+          Odjavi se
+        </button>
+        <button *ngIf="!currentUser" (click)="onShowLogin()" class="btn btn-primary">
+          Prijavi se
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="app-main">
+    <!-- Movies View -->
+    <div *ngIf="currentView === 'movies'" class="movies-view">
+      <app-movie-search (searchCriteria)="onSearch($event)"></app-movie-search>
+      <app-movie-list 
+        [movies]="filteredMovies" 
+        (movieSelected)="onMovieSelected($event)">
+      </app-movie-list>
+    </div>
+
+    <!-- Movie Details View -->
+    <div *ngIf="currentView === 'movie-details' && selectedMovie" class="movie-details-view">
+      <app-movie-details 
+        [movie]="selectedMovie"
+        (backToList)="onBackToList()"
+        (reservationMade)="onReservationMade($event)">
+      </app-movie-details>
+    </div>
+
+    <!-- Cart View -->
+    <div *ngIf="currentView === 'cart'" class="cart-view">
+      <app-cart 
+        [reservations]="userReservations"
+        [totalPrice]="totalPrice"
+        (removeReservation)="onRemoveReservation($event)">
+      </app-cart>
+    </div>
+
+    <!-- Login View -->
+    <div *ngIf="currentView === 'login'" class="auth-view">
+      <app-login 
+        (loginSuccess)="onLoginSuccess()"
+        (showRegister)="onShowRegister()">
+      </app-login>
+    </div>
+
+    <!-- Register View -->
+    <div *ngIf="currentView === 'register'" class="auth-view">
+      <app-register 
+        (registerSuccess)="onRegisterSuccess()"
+        (showLogin)="onShowLogin()">
+      </app-register>
+    </div>
+  </main>
+</div>
