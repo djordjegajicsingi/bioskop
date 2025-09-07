@@ -1,0 +1,47 @@
+<div *ngIf="movie" class="movie-details">
+  <div class="header">
+    <button (click)="onBack()" class="back-btn">← Nazad na listu</button>
+    <h1>{{movie.title}}</h1>
+  </div>
+
+  <div class="movie-content">
+    <div class="movie-info">
+      <div class="info-section">
+        <h3>Osnovne informacije</h3>
+        <p><strong>Žanr:</strong> {{movie.genre}}</p>
+        <p><strong>Režiser:</strong> {{movie.director}}</p>
+        <p><strong>Trajanje:</strong> {{movie.duration}} minuta</p>
+        <p><strong>Datum izlaska:</strong> {{movie.releaseDate | date:'dd.MM.yyyy'}}</p>
+        <p><strong>Cena karte:</strong> {{movie.price}} RSD</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Glumci</h3>
+        <p>{{movie.actors.join(', ')}}</p>
+      </div>
+
+      <div class="info-section">
+        <h3>Opis</h3>
+        <p>{{movie.description}}</p>
+      </div>
+
+    </div>
+
+    <div class="projections-section">
+      <h3>Dostupne projekcije</h3>
+      <div *ngIf="projections.length === 0" class="no-projections">
+        <p>Nema dostupnih projekcija za ovaj film.</p>
+      </div>
+      
+      <div *ngFor="let projection of projections" class="projection-card">
+        <div class="projection-info">
+          <p><strong>Datum:</strong> {{projection.projectionDate | date:'dd.MM.yyyy'}}</p>
+          <p><strong>Vreme:</strong> {{projection.projectionTime}}</p>
+        </div>
+        <button (click)="onReserve(projection)" class="reserve-btn" [disabled]="projection.status !== 'rezervisano'">
+          Rezerviši
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
