@@ -1,0 +1,55 @@
+<div class="search-container">
+  <h3>Pretraga filmova</h3>
+  <form (ngSubmit)="onSearch()">
+    <div class="form-row">
+      <div class="form-group">
+        <label for="title">Naziv filma:</label>
+        <input type="text" id="title" [(ngModel)]="searchForm.title" name="title" placeholder="Unesite naziv filma">
+      </div>
+      
+      <div class="form-group">
+        <label for="genre">Žanr:</label>
+        <select id="genre" [(ngModel)]="searchForm.genre" name="genre">
+          <option value="">Svi žanrovi</option>
+          <option *ngFor="let genre of genres" [value]="genre">{{genre}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="director">Režiser:</label>
+        <input type="text" id="director" [(ngModel)]="searchForm.director" name="director" placeholder="Unesite ime režisera">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="minDuration">Minimalno trajanje (min):</label>
+        <input type="number" id="minDuration" [(ngModel)]="searchForm.minDuration" name="minDuration" placeholder="Min">
+      </div>
+      
+      <div class="form-group">
+        <label for="maxDuration">Maksimalno trajanje (min):</label>
+        <input type="number" id="maxDuration" [(ngModel)]="searchForm.maxDuration" name="maxDuration" placeholder="Max">
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="minPrice">Minimalna cena:</label>
+        <input type="number" id="minPrice" [(ngModel)]="searchForm.minPrice" name="minPrice" placeholder="Min cena">
+      </div>
+      
+      <div class="form-group">
+        <label for="maxPrice">Maksimalna cena:</label>
+        <input type="number" id="maxPrice" [(ngModel)]="searchForm.maxPrice" name="maxPrice" placeholder="Max cena">
+      </div>
+    </div>
+
+    <div class="button-group">
+      <button type="submit" class="btn btn-primary">Pretraži</button>
+      <button type="button" (click)="onClear()" class="btn btn-secondary">Obriši</button>
+    </div>
+  </form>
+</div>
