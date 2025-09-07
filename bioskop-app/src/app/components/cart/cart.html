@@ -1,0 +1,37 @@
+<div class="cart-container">
+  <h2>Korpa rezervacija</h2>
+  
+  <div *ngIf="reservations.length === 0" class="empty-cart">
+    <p>Korpa je prazna.</p>
+  </div>
+
+  <div *ngFor="let reservation of reservations" class="reservation-card">
+    <div class="reservation-header">
+      <h3>{{reservation.projection.movie.title}}</h3>
+      <span class="price">{{reservation.totalPrice}} RSD</span>
+    </div>
+
+    <div class="reservation-info">
+      <p><strong>Datum projekcije:</strong> {{reservation.projection.projectionDate | date:'dd.MM.yyyy'}}</p>
+      <p><strong>Vreme:</strong> {{reservation.projection.projectionTime}}</p>
+      <p><strong>Datum rezervacije:</strong> {{reservation.reservationDate | date:'dd.MM.yyyy HH:mm'}}</p>
+    </div>
+
+
+
+    <!-- Action buttons -->
+    <div class="action-buttons">
+      <button *ngIf="canDelete(reservation)" 
+              (click)="onRemove(reservation.id)" 
+              class="btn btn-danger">
+        Otkaži rezervaciju
+      </button>
+    </div>
+  </div>
+
+  <div *ngIf="reservations.length > 0" class="cart-summary">
+    <div class="total-price">
+      <h3>Ukupna cena: {{totalPrice}} RSD</h3>
+    </div>
+  </div>
+</div>
